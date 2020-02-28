@@ -1,5 +1,4 @@
 import pygame
-
 pygame.init()
 ventana = pygame.display.set_mode([600,450])
 #loop principal
@@ -18,4 +17,4 @@ while fin:
 		 		y -= 10
 	ventana.fill([0,0,0])
 	pygame.draw.line(ventana, [255,255,255],[50,y],[100,y],5)
-	pygame.display.flip() 
+	pygame.display.flip()
