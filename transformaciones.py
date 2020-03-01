@@ -6,13 +6,15 @@ ANCHO = 600
 ALTO = 600
 ORIGEN = (300,300)
 RELOJ = pygame.time.Clock()
-#TODO hacer que el triangulo se mueva con la tecla
+p1 = 100
+p2 = 310
+p3 = 200
 if __name__ == "__main__":
     pygame.init()
     ventana = pygame.display.set_mode([ANCHO,ALTO])
     while True:
-        puntos=[[100,200],[310,200],[200,350]]
-        transformada=[]
+        puntos=[[p1,200],[p2,200],[p3,350]]
+        transformada = []
         #captura todos los eventos
         for event in pygame.event.get():
             #registra el cierre del programa
@@ -21,17 +23,17 @@ if __name__ == "__main__":
                 sys.exit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RIGHT:
-                    print(puntos)
-                    indice = 0
-                    for i in puntos:
-                        i[0] += 60
-                    print(puntos)
-        ventana.fill([0,0,0])
+                    ventana.fill([0,0,0])
+                    p1 += 60
+                    p2 += 60
+                    p3 += 60
+        #punto normal
         pygame.draw.polygon(ventana,[255,255,255],puntos)
         for i in puntos:
             punto=mi_lib.transformada_r2(i,ORIGEN)
             transformada.append(punto)
-        mi_lib.dibujar_plano(ORIGEN,[ANCHO,ALTO],ventana)
+        #punto transformado
         pygame.draw.polygon(ventana,[255,255,255],transformada)
+        mi_lib.dibujar_plano(ORIGEN,[ANCHO,ALTO],ventana)
         pygame.display.flip()
         RELOJ.tick(60)

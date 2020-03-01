@@ -29,3 +29,12 @@ def transformada_r2(pos,origen):
     y = origen[1] + pos[1]
     punto = [x,y]
     return punto
+
+#NOTE funcion para unir triangulos entre si por medio de puntos comunes
+# entradas: ventana, puntos del primer triangulo, puntos del segundo triangulo
+# proceso: dibujar lineas entre puntos comunes
+# salida: ninguna
+def integrador(v,f1,f2):
+    pygame.draw.line(v,[255,255,255],f1[0],f2[0])
+    pygame.draw.line(v,[255,255,255],f1[1],f2[1])
+    pygame.draw.line(v,[255,255,255],f1[2],f2[2])
