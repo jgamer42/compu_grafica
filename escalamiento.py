@@ -1,4 +1,3 @@
-#TODO capturar tres puntos y dibujar un triangulo y luego escalarlo cona la rueda del raton
 import pygame
 import math
 import sys
@@ -24,17 +23,21 @@ if __name__ == "__main__":
                 if event.button == 1:
                     if len(puntos) < 3:
                         puntos.append(event.pos)
+                    if len(puntos) == 3:
+                        pygame.draw.polygon(ventana,[255,255,255],puntos,2)
                 if event.button == 4:
-                    if len(puntos) < 3:
+                    if len(puntos) == 3:
+                        aux = []
                         ventana.fill([0,0,0])
-                    print("arriba")
+                        aux = mi_lib.transformada_escalamiento(puntos,[escalamiento,escalamiento])
+                        pygame.draw.polygon(ventana,[255,255,255],aux,2)
+                        escalamiento += 0.1
                 if event.button == 5:
-                    if len(puntos) < 3:
+                    if len(puntos)== 3:
                         ventana.fill([0,0,0])
-                    print("abajo")
-        pygame.draw.polygon(ventana,[255,255,255],puntos,1)
-        escalados = mi_lib.transformada_escalamiento(puntos,(2,2))
-        pygame.draw.polygon(ventana,[255,255,255],escalados,1)
-        escalados = mi_lib.transformada_escalamiento(puntos,(0.5,0.5))
-        pygame.draw.polygon(ventana,[255,255,255],escalados,1)
+                        aux = []
+                        ventana.fill([0,0,0])
+                        aux = mi_lib.transformada_escalamiento(puntos,[escalamiento,escalamiento])
+                        pygame.draw.polygon(ventana,[255,255,255],aux,2)
+                        escalamiento -= 0.1
         pygame.display.flip()

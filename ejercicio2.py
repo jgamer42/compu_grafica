@@ -23,16 +23,18 @@ if __name__ == "__main__":
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if len(puntos) == 2:
                     m = mi_lib.pendiente(puntos[0],puntos[1])
+                    print(m)
                     b = mi_lib.desplazamiento(puntos[0],puntos[1],m)
+                    x = LIMITES[0]
                     while x < LIMITES[1]:
-                        y = int(m*x) + b
-                        punto = [x,y]
-                        x += 10
+                        y = m*x + b
+                        punto = [int(x),int(y)]
+                        punto = mi_lib.transformada_r2(punto,ORIGEN)
                         pygame.draw.circle(ventana,[255,255,255],punto,2)
-                        print(punto)
-                    puntos = []
+                        x += 10
                 else:
-                    punto = mi_lib.transformada_r2(list(event.pos),ORIGEN)
+                    punto = mi_lib.transformada_pantalla(list(event.pos),ORIGEN)
+                    print(punto)
                     puntos.append(punto)
 
         mi_lib.dibujar_plano(ORIGEN,[ANCHO,ALTO],ventana)
