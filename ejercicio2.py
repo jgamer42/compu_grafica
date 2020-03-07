@@ -1,5 +1,3 @@
-#TODO recibir dos puntos y dibujar una recta que cruce
-#por ambos puntos
 import pygame
 import math
 import sys

@@ -1,4 +1,5 @@
 import pygame
+import math
 NEGRO = [0,0,0]
 VERDE = [0,255,0]
 MATRIZ_ESCALAMIENTO = [[1,0,0],
@@ -28,8 +29,8 @@ def dibujo_en_plano(ventana,pos,origen):
 # salida: el punto transformado a la coordenada en pantalla
 def transformada_r2(pos,origen):
     x = origen[0] + pos[0]
-    pos[1] = pos[1] * (-1)
-    y = origen[1] + pos[1]
+    aux = pos[1] * (-1)
+    y = origen[1] + aux
     punto = [x,y]
     return punto
 
@@ -83,3 +84,17 @@ def transformada_escalamiento(puntos,escala):
         aux = [int(a),int(b)]
         salida.append(aux)
     return(salida)
+
+#NOTE funcion para rotar una figura en sentido horario
+# entradas: lista de puntos , angulo
+# proceso: cacula la los puntos con la rotacion
+# salida: nuevos puntos rotados
+def rotacion_horaria(puntos,angulo):
+    radianes = math.radians(angulo)
+    salida = []
+    for i in puntos:
+        x_rotada = (i[0]*(math.cos(radianes))) + (i[1]*(math.sin(radianes)))
+        y_rotada = (-i[0]*(math.sin(radianes))) + (i[1]*(math.cos(radianes)))
+        punto_rotado=[int(x_rotada),int(y_rotada)]
+        salida.append(punto_rotado)
+    return (salida)
