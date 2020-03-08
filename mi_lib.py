@@ -40,8 +40,8 @@ def transformada_r2(pos,origen):
 # salida: el punto transformado a la coordenada cartesiana
 def transformada_pantalla(pos,origen):
     x = pos[0] - origen[0]
-    pos[1] = pos[1] * (-1)
-    y = pos[1] + origen[1]
+    aux = pos[1] * (-1)
+    y = aux + origen[1]
     punto = [x,y]
     return punto
 
