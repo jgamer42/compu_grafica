@@ -28,10 +28,12 @@ def dibujo_en_plano(ventana,pos,origen):
 # proceso: realiza la transformacion lineal del punto de cartesiano a pantalla
 # salida: el punto transformado a la coordenada en pantalla
 def transformada_r2(pos,origen):
+    print("recibio:",pos)
     x = origen[0] + pos[0]
     aux = pos[1] * (-1)
     y = origen[1] + aux
     punto = [x,y]
+    print("entrego:",punto)
     return punto
 
 #NOTE funcion para transformar de coordenada pantalla a coordenada cartesiana
@@ -123,6 +125,46 @@ def escalamiento_punto_fijo(puntos,escalamiento):
         po = transformada_desplazamiento(pe[0],punto_fijo[0],punto_fijo[1])
         print(po)
         salida.append(po)
-    print(salida)
     return(salida)
-#TODO rotacion punto fijo
+
+
+#NOTE funcion para transformar un punto de coordenadas polares a cartesianas
+#entradas: punto a transformar
+#proceso: aplica la transformacio normal(ver formula)
+#salida: punto transformado
+def transformada_polar_cartesiana(punto):
+    angulo = math.radians(punto[1])
+    x = int(punto[0] * math.cos(angulo))
+    y = int(punto[0] * math.sin(angulo))
+    salida = [x,y]
+    return (salida)
+
+#NOTE funcion para dibujar un cardiode
+#entradas: a,b constantes de la ecuacion (ver mate 2)
+#proceso: recorre con todos los angulos de 0 a 360, calcula r
+#           respecto a la formula, convierte a cartesiano y lo agrega
+#           a los puntos de la figura
+#salidas: puntos de la figura en cartesiano
+def cardiode(a,b):
+    angulo = 0
+    figura = []
+    while angulo <= 360:
+        angulo_rad = math.radians(angulo)
+        r = a + b*math.cos(angulo_rad)
+        punto = [r,angulo]
+        cartesiano = transformada_polar_cartesiana(punto)
+        figura.append(cartesiano)
+        angulo += 1
+    return (figura)
+
+def figura_pitagorica(radio,lados):
+    mod_angulo = 360/lados
+    angulo = 0
+    figura = []
+    while angulo <= (360-mod_angulo):
+        punto = transformada_polar_cartesiana([radio,angulo])
+        figura.append(punto)
+        angulo = angulo + mod_angulo
+    return(figura)
+
+#TODO rotacion punto fijo , rotacion rotacion anti horaria
