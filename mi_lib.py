@@ -28,12 +28,10 @@ def dibujo_en_plano(ventana,pos,origen):
 # proceso: realiza la transformacion lineal del punto de cartesiano a pantalla
 # salida: el punto transformado a la coordenada en pantalla
 def transformada_r2(pos,origen):
-    print("recibio:",pos)
     x = origen[0] + pos[0]
     aux = pos[1] * (-1)
     y = origen[1] + aux
     punto = [x,y]
-    print("entrego:",punto)
     return punto
 
 #NOTE funcion para transformar de coordenada pantalla a coordenada cartesiana
@@ -106,7 +104,6 @@ def rotacion_horaria(puntos,angulo):
 # proceso: cacula la los puntos con el desplazamiento
 # salida: nuevos puntos desplazado
 def transformada_desplazamiento(punto,tx,ty):
-    print(punto)
     x_d = punto[0] + tx
     y_d = punto[1] + ty
     return ([x_d,y_d])
