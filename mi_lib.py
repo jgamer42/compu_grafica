@@ -89,7 +89,7 @@ def transformada_escalamiento(puntos,escala):
 # entradas: lista de puntos , angulo
 # proceso: cacula la los puntos con la rotacion
 # salida: nuevos puntos rotados
-def rotacion_horaria(puntos,angulo):
+def rotacion_anti_horaria(puntos,angulo):
     radianes = math.radians(angulo)
     salida = []
     for i in puntos:
