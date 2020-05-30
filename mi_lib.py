@@ -112,15 +112,15 @@ def transformada_desplazamiento(punto,tx,ty):
 # entradas: figura, escalamiento
 # proceso: desplazar al orgien, escalar, desplazar al punto inicial
 # salida: nuevos puntos escalados
-def escalamiento_punto_fijo(puntos,escalamiento):
-    punto_fijo = puntos[0]
+def escalamiento_punto_fijo(puntos,escalamiento,punto_fijo=None):
+    if(punto_fijo==None):
+        punto_fijo=puntos[0]
     salida = []
     Traslacion = [-punto_fijo[0],-punto_fijo[1]]
     for i in puntos:
         pt = transformada_desplazamiento(i,Traslacion[0],Traslacion[1])
         pe = transformada_escalamiento([pt],[escalamiento,escalamiento])
         po = transformada_desplazamiento(pe[0],punto_fijo[0],punto_fijo[1])
-        print(po)
         salida.append(po)
     return(salida)
 
