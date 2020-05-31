@@ -26,7 +26,7 @@ if __name__ == '__main__':
         ventana.blit(titulo,[350,350])
         pygame.display.flip()
     musica.stop()
-    #TODO seccion de juego
+    #NOTE seccion de juego
     jugadores=pygame.sprite.Group()
     j=Jugador([300,200])
     jugadores.add(j)
