@@ -11,6 +11,6 @@ class Bloque(pygame.sprite.Sprite):
         self.rect.y = pos[1]
         self.velx=0
 
-    def update(self):
-        self.velx = Const.f_velx
-        self.rect.x = self.rect.x + self.velx
+    #def update(self):
+        #self.velx = Const.f_velx
+        #self.rect.x = self.rect.x + self.velx

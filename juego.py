@@ -8,14 +8,20 @@ if __name__ == '__main__':
 
     #NOTE Definicion de variables
     ventana=pygame.display.set_mode([Const.ANCHO,Const.ALTO])
-    fondo = pygame.image.load("fondo.jpg")
-    info = fondo.get_rect()
+    #Carga las texturas
+    textura = pygame.image.load("textura.png")
+    texturas = []
+    for i in range(16):
+        cuadro = textura.subsurface(32*i,0,32,32)
+        texturas.append(cuadro)
+    #fondo = pygame.image.load("fondo.jpg")
+    #info = fondo.get_rect()
     jugadores=pygame.sprite.Group()
     bloques = pygame.sprite.Group()
     j=Jugador([300,200],[Const.ANCHO,Const.ALTO])
     jugadores.add(j)
-    b=Bloque([200,200],200,120)
-    bloques.add(b)
+    #b=Bloque([200,200],200,120)
+    #bloques.add(b)
     j.colisiones=bloques
     #variables del fondo
     f_posx=0
@@ -43,10 +49,11 @@ if __name__ == '__main__':
         #NOTE Colision
         #NOTE Limpieza de memoria
         #NOTE Refresco
-        f_posx= Const.f_velx + f_posx
         jugadores.update()
         bloques.update()
-        ventana.blit(fondo,[f_posx,f_posy])
+        #ventana.blit(fondo,[f_posx,f_posy])
+        ventana.fill(Const.VERDE)
+        ventana.blit(texturas[0],[0,0])
         jugadores.draw(ventana)
         bloques.draw(ventana)
         pygame.display.flip()

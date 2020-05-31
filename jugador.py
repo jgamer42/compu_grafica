@@ -71,4 +71,4 @@ class Jugador(pygame.sprite.Sprite):
     def frenar(self):
         self.velx=0
         self.vely=0
-        Const.f_velx=0
+        #Const.f_velx=0

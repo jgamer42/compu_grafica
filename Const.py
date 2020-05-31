@@ -7,4 +7,4 @@ AMARILLO=[255,255,0]
 BLANCO=[255,255,255]
 
 #utilidades auxiliares 
-f_velx= 0
+#f_velx= 0
