@@ -1,9 +1,6 @@
 import pygame
 import const
 from jugador import Jugador
-import random
-from bloque import Bloque
-from raton import Raton
 if __name__ == '__main__':
     pygame.init()
     window = pygame.display.set_mode([const.ANCHO,const.ALTO])
@@ -23,10 +20,7 @@ if __name__ == '__main__':
     player = Jugador([0,0],matriz)
     players = pygame.sprite.Group()
     players.add(player)
-    blocks = pygame.sprite.Group()
-    block = Bloque([80,80])
-    blocks.add(block)
-    ratones = pygame.sprite.Group()
+
     while(not game):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -42,22 +36,8 @@ if __name__ == '__main__':
                     player.acelerar(-5,0,1)
             if event.type == pygame.KEYUP:
                 player.frenar()
-        for b in blocks:
-            if(b.temp < 0):
-                b.temp = random.randrange(100)
-                r = Raton([b.rect.x,b.rect.y],matriz)
-                ratones.add(r)
-                if(b.temp < 25):
-                    r.velx = 5
-                    r.direc =2
-                
-
         players.update()
-        ratones.update()
-        block.update()
         window.fill(const.NEGRO)
         players.draw(window)
-        blocks.draw(window)
-        ratones.draw(window)
         pygame.display.flip()
         clock.tick(10)
