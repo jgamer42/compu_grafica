@@ -12,7 +12,7 @@ class Jugador(pygame.sprite.Sprite):
         self.rect.y= (Const.ANCHO-self.rect.height) - 10
         self.velx=0
         self.vely=0
-        self.vida=2
+        self.vida=0
 
     def RetPos(self):
         x=self.rect.x
