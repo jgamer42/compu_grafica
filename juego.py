@@ -1,63 +1,68 @@
 import pygame
 import const
 from jugador import Jugador
-import random
 from bloque import Bloque
-from raton import Raton
 if __name__ == '__main__':
     pygame.init()
     window = pygame.display.set_mode([const.ANCHO,const.ALTO])
-    animal = pygame.image.load('sprites.png')
+    ken = pygame.image.load('ken.png')
     clock = pygame.time.Clock()
     matriz = []
     cont=0
-    for x in range(8):
+    combo = ""
+    for x in range(10):
         row = []
-        for c in range(12):
-            square = animal.subsurface(32*c,32*x,32,32)
+        for c in range(7):
+            square = ken.subsurface(70*c,80*x,70,80)
             row.append(square)
         matriz.append(row)
 
     game = False
+    block = Bloque([50,400],[40,60])
+    blocks = pygame.sprite.Group()
+    blocks.add(block)
 
-    player = Jugador([0,0],matriz)
+    player = Jugador([0,500],matriz)
     players = pygame.sprite.Group()
     players.add(player)
-    blocks = pygame.sprite.Group()
-    block = Bloque([80,80])
-    blocks.add(block)
-    ratones = pygame.sprite.Group()
     while(not game):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 game = True
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_DOWN:
-                    player.acelerar(0,5,0)
+                    player.acelerar(0,5)
+                    player.swap_animation(1)
                 if event.key == pygame.K_UP:
-                    player.acelerar(0,-5,3)
+                    player.acelerar(0,-5)
+                    player.swap_animation(1)
                 if event.key == pygame.K_RIGHT:
-                    player.acelerar(5,0,2)
+                    player.acelerar(5,0)
+                    player.swap_animation(1)
                 if event.key == pygame.K_LEFT:
-                    player.acelerar(-5,0,1)
+                    player.acelerar(-5,0)
+                    player.swap_animation(1)
+                if event.key == pygame.K_c:
+                    player.swap_animation(2)
+                    combo=combo + 'c'
             if event.type == pygame.KEYUP:
                 player.frenar()
-        for b in blocks:
-            if(b.temp < 0):
-                b.temp = random.randrange(100)
-                r = Raton([b.rect.x,b.rect.y],matriz)
-                ratones.add(r)
-                if(b.temp < 25):
-                    r.velx = 5
-                    r.direc =2
-                
 
+        ls_colision = pygame.sprite.spritecollide(player,blocks,False)
+        for col in ls_colision:
+            if (player.action == 2) and ( col.hit_radio_bot < player.rect.bottom < col.hit_radio_top):
+                col.velx = 5
+        for b in blocks:
+            if (b.velx > 0):
+                b.velx = b.velx -1
+
+
+        player.review_combo(combo) 
         players.update()
-        ratones.update()
-        block.update()
+        blocks.update()
         window.fill(const.NEGRO)
+        pygame.draw.line(window,const.BLANCO,[0,const.LIMY],[const.ANCHO,const.LIMY])
         players.draw(window)
         blocks.draw(window)
-        ratones.draw(window)
         pygame.display.flip()
         clock.tick(10)
