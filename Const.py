@@ -1,0 +1,10 @@
+ANCHO=600
+ALTO=600
+NEGRO=[0,0,0]
+ROJO=[255,0,0]
+VERDE=[0,255,0]
+AMARILLO=[255,255,0]
+BLANCO=[255,255,255]
+
+#utilidades auxiliares 
+f_velx= 0
